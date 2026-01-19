@@ -1,18 +1,19 @@
 "use client";
 import { useState } from "react";
+import StatsChart from "./StatsChart";
 
 export default function PokemonCard({ pokemon }) {
   const [showStats, setShowStats] = useState(false);
 
   return (
-    <div className="border rounded shadow p-4 bg-white">
+    <div className="border rounded shadow p-4 bg-white text-gray-900">
       <img src={pokemon.sprites.front_default} className="h-24 mx-auto" />
       
-      <h3 className="text-lg font-semibold text-center capitalize">
+      <h3 className="text-lg font-semibold text-center capitalize text-gray-900">
         {pokemon.name}
       </h3>
       
-      <p className="text-center text-sm">
+      <p className="text-center text-sm text-gray-600">
         Type: {pokemon.types.map(t => t.type.name).join(", ")}
       </p>
 
@@ -24,13 +25,9 @@ export default function PokemonCard({ pokemon }) {
       </button>
 
       {showStats && (
-        <ul className="mt-2 text-sm">
-          {pokemon.stats.map((s) => (
-            <li key={s.stat.name}>
-              {s.stat.name}: {s.base_stat}
-            </li>
-          ))}
-        </ul>
+        <div className="mt-4">
+          <StatsChart pokemon={pokemon} />
+        </div>
       )}
     </div>
   );
