@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="app/assets/Pokedex.png" alt="Pokedex" width="200" />
+  <img src="app/assets/Pokedex.png" alt="Pokedex" width="400" />
 </p>
 
 <h1 align="center">Pokedex</h1>
