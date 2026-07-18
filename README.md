@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pokedex
+
+A Pokemon demo app built with Next.js 16, React 19, TypeScript, Tailwind CSS, and Chart.js. Fetches data from the [PokeAPI](https://pokeapi.co/).
+
+## Features
+
+- Browse the first 12 Pokemon with search filtering
+- Radar chart and stat bars for each Pokemon's base stats
+- Dark mode toggle
+- Responsive design
+- Server-side API routes with ISR caching
+- TypeScript with full type definitions
+- Unit and component tests
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run tests in watch mode |
+| `npm run test:run` | Run tests once |
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** Next.js 16 (App Router)
+- **UI:** React 19, Tailwind CSS 4
+- **Charting:** Chart.js + react-chartjs-2
+- **Language:** TypeScript
+- **Testing:** Vitest + Testing Library
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Method | Description |
+|-------|--------|-------------|
+| `/api/pokemon?limit=N` | GET | Fetch Pokemon list with details |
+| `/api/pokemon/[id]` | GET | Fetch a single Pokemon by ID or name |
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/
+├── api/pokemon/          # REST API routes
+├── about/                # About page
+├── components/           # Reusable UI components
+├── contexts/             # React context providers
+├── hooks/                # Custom React hooks
+├── error.tsx             # Error boundary
+├── globals.css           # Global styles
+├── layout.tsx            # Root layout
+├── loading.tsx           # Loading state
+└── page.tsx              # Home page
+types/
+└── pokemon.ts            # TypeScript type definitions
+tests/
+├── ClientWrapper.test.tsx
+├── PokemonCard.test.tsx
+├── Search.test.tsx
+└── setup.ts              # Test setup
+```

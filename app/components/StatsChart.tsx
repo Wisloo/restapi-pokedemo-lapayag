@@ -11,8 +11,8 @@ import {
 } from "chart.js";
 
 import { Radar } from "react-chartjs-2";
+import type { Pokemon } from "@/types/pokemon";
 
-// register radar components
 ChartJS.register(
   RadialLinearScale,
   PointElement,
@@ -22,7 +22,11 @@ ChartJS.register(
   Legend
 );
 
-export default function StatsChart({ pokemon }) {
+interface StatsChartProps {
+  pokemon: Pokemon;
+}
+
+export default function StatsChart({ pokemon }: StatsChartProps) {
   const labels = pokemon.stats.map((s) => s.stat.name);
   const values = pokemon.stats.map((s) => s.base_stat);
 
@@ -49,25 +53,24 @@ export default function StatsChart({ pokemon }) {
       r: {
         suggestedMin: 0,
         suggestedMax,
-        ticks: { beginAtZero: true },
       },
     },
     plugins: {
-      legend: { position: "top" },
+      legend: { position: "top" as const },
       tooltip: { enabled: true },
     },
   };
 
   return (
-    <div className="p-4 bg-white rounded-md shadow">
+    <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow">
       <h3 className="text-xl font-semibold capitalize mb-3">Stats for {pokemon.name}</h3>
 
-      <div className="flex gap-4 items-start">
-        <div className="w-1/2 h-64">
+      <div className="flex flex-col sm:flex-row gap-4 items-start">
+        <div className="w-full sm:w-1/2 h-64">
           <Radar data={data} options={options} />
         </div>
 
-        <div className="w-1/2">
+        <div className="w-full sm:w-1/2">
           <ul className="space-y-3 text-sm">
             {pokemon.stats.map((s) => (
               <li key={s.stat.name}>
@@ -76,7 +79,7 @@ export default function StatsChart({ pokemon }) {
                   <span className="font-semibold">{s.base_stat}</span>
                 </div>
 
-                <div className="h-2 bg-gray-200 rounded mt-1 overflow-hidden">
+                <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded mt-1 overflow-hidden">
                   <div
                     style={{ width: `${(s.base_stat / suggestedMax) * 100}%` }}
                     className="h-full bg-blue-500"
