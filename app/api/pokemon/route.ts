@@ -3,10 +3,11 @@ import type { Pokemon } from "@/types/pokemon";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const limit = searchParams.get("limit") || "12";
+  const limit = searchParams.get("limit") || "24";
+  const offset = searchParams.get("offset") || "0";
 
   try {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`, {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`, {
       next: { revalidate: 3600 },
     });
 

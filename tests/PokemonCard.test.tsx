@@ -22,38 +22,25 @@ const mockPokemon: Pokemon = {
 
 describe("PokemonCard", () => {
   it("renders pokemon name capitalized", () => {
-    render(<PokemonCard pokemon={mockPokemon} />);
+    render(<PokemonCard pokemon={mockPokemon} onSelect={vi.fn()} />);
     expect(screen.getByText("pikachu")).toBeInTheDocument();
   });
 
-  it("renders pokemon type", () => {
-    render(<PokemonCard pokemon={mockPokemon} />);
-    expect(screen.getByText("Type: electric")).toBeInTheDocument();
+  it("renders pokemon type badges", () => {
+    render(<PokemonCard pokemon={mockPokemon} onSelect={vi.fn()} />);
+    expect(screen.getByText("electric")).toBeInTheDocument();
   });
 
-  it("renders show stats button", () => {
-    render(<PokemonCard pokemon={mockPokemon} />);
-    expect(screen.getByText("Show Stats")).toBeInTheDocument();
+  it("renders pokemon id", () => {
+    render(<PokemonCard pokemon={mockPokemon} onSelect={vi.fn()} />);
+    expect(screen.getByText("#025")).toBeInTheDocument();
   });
 
-  it("toggles stats visibility on button click", () => {
-    render(<PokemonCard pokemon={mockPokemon} />);
+  it("calls onSelect when card is clicked", () => {
+    const onSelect = vi.fn();
+    render(<PokemonCard pokemon={mockPokemon} onSelect={onSelect} />);
     
-    const button = screen.getByText("Show Stats");
-    fireEvent.click(button);
-    
-    expect(screen.getByText("Hide Stats")).toBeInTheDocument();
-    expect(screen.getByText(/Stats for pikachu/)).toBeInTheDocument();
-  });
-
-  it("hides stats when button clicked again", () => {
-    render(<PokemonCard pokemon={mockPokemon} />);
-    
-    const button = screen.getByText("Show Stats");
-    fireEvent.click(button);
-    fireEvent.click(screen.getByText("Hide Stats"));
-    
-    expect(screen.getByText("Show Stats")).toBeInTheDocument();
-    expect(screen.queryByText(/Stats for pikachu/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("pikachu"));
+    expect(onSelect).toHaveBeenCalledWith(mockPokemon);
   });
 });

@@ -20,7 +20,18 @@ export interface PokemonSprites {
   front_shiny: string | null;
   back_default: string | null;
   back_shiny: string | null;
-  other?: Record<string, unknown>;
+  other?: {
+    "official-artwork"?: {
+      front_default: string | null;
+      front_shiny: string | null;
+    };
+    dream_world?: {
+      front_default: string | null;
+    };
+    home?: {
+      front_default: string | null;
+    };
+  };
 }
 
 export interface Pokemon {
